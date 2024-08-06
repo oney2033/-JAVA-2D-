@@ -1,30 +1,41 @@
 package ui;
 
+
+import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.again.Screen;
 
 public class UIManager 
 {
 	private List<UIPanel> panels = new ArrayList<UIPanel>();	
 
 	public UIManager() {
-		
+
 	}
 	
-	public void addPanel(UIPanel panel) {
+	public void addPanel(UIPanel panel) 
+	{
 		panels.add(panel);
 	}
-/*
-	public void update() {
-		for (UIPanel panel : panels) {
+	
+	public void update()
+	{
+		for(UIPanel panel : panels)
+		{
 			panel.update();
 		}
 	}
-	
-	public void render(Graphics g) {
-		for (UIPanel panel : panels) {
+
+
+	public void render(Graphics g) 
+	{
+		for (UIPanel panel : panels)
+		{
 			panel.render(g);
 		}
 	}
-	*/
+	
+
 }

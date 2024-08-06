@@ -18,15 +18,18 @@ import com.level.SpawnLevel;
 import com.level.TileCoordinate;
 
 import entity.Player;
+import ui.UIComponent;
 import ui.UIManager;
+import ui.UIPanel;
 
 
 public class Game extends Canvas implements Runnable 
 {
 	private static final long serialVersionUID = 6436659312396801788L;
 	
-	private static int width = 300;
-	private static int height = width / 16 * 9;
+	private static int width = 300 - 80 ;
+	private static int height = 168;
+	//private static int height = width / 16 * 9;
 	private static int scale = 3;
 	public static String title = "Rain";
 	
@@ -46,7 +49,7 @@ public class Game extends Canvas implements Runnable
 	
 	public Game()
 	{
-		Dimension size = new Dimension(width * scale , height *scale );
+		Dimension size = new Dimension(width * scale + 80 * 3, height *scale );
 		//Dimension size = new Dimension(width , height );
 		setPreferredSize(size);
 		uiManager = new UIManager();
@@ -57,10 +60,12 @@ public class Game extends Canvas implements Runnable
 		//level = new SpawnLevel("resa/textures/levels/level.png");
 		level = level.spawn;
 		TileCoordinate playerSpawn = new TileCoordinate(19,8);
-		player = new Player(playerSpawn.x(),playerSpawn.y(),key);
+		player = new Player("Hello World",playerSpawn.x(),playerSpawn.y(),key);
 		//player.init(level);
 		level.add(player);
 		font = new Fonts();
+		
+
 		addKeyListener(key);
 		Mouese mouse = new Mouese();
 		addMouseListener(mouse);
@@ -141,7 +146,7 @@ public class Game extends Canvas implements Runnable
 		key.update();
 		//player.update();
 		level.update();
-		//uiManager.update();
+		uiManager.update();
 	}
 	
 	public void render()
@@ -157,7 +162,7 @@ public class Game extends Canvas implements Runnable
 		double xScroll = player.getX() - screen.width/2;
 		double yScroll = player.getY() - screen.height/2;
 		level.render((int)xScroll, (int)yScroll, screen);
-		//uiManager.render();
+		//uiManager.render(screen);
 		//font.render(50, 50, -3, "Hey what's up \nguys, My name is\nThe Comedy!", screen);
 		//player.render(screen);
 		//screen.renderSheet(40, 40, SpriteSheet.player_down, false);
@@ -166,7 +171,11 @@ public class Game extends Canvas implements Runnable
 			pixels[i] = screen.Pixels[i];
 		}
 		Graphics g = bs.getDrawGraphics();
-		g.drawImage(image,0,0,getWidth(),getHeight(),null);
+		//g.setColor(new Color(0xff00ff));
+		//g.fillRect(0, 0, getWidth(), getHeight());
+		g.drawImage(image,0,0,width * scale,height * scale,null);
+		uiManager.render(g);;
+		//g.drawImage(image,0,0,getWidth(),getHeight(),null);
 		g.setColor(Color.white);
 		g.setFont(new Font("Verdand",0,20));
 		g.drawString("X: " + player.getX() + ", Y: " + player.getY(), 150, 100);

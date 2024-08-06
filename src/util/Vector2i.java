@@ -18,9 +18,9 @@ public class Vector2i {
 		return Math.sqrt(x * x + y * y);
 	}
 	
-	public Vector2i()
+	public Vector2i(Vector2i position)
 	{
-		set(0,0);
+		set(position.x,position.y);
 	}
 	
 	public Vector2i(int x, int y)
@@ -28,6 +28,12 @@ public class Vector2i {
 		set(x,y);
 	}
 	
+
+	public Vector2i() 
+	{
+		
+	}
+
 	public void Vector2i(Vector2i vector)
 	{
 		set(vector.x, vector.y);
@@ -43,6 +49,13 @@ public class Vector2i {
 	{
 		this.x += vector.x;
 		this.y += vector.y;
+		return this;
+	}
+	
+	public Vector2i add(int value)
+	{
+		this.x += value;
+		this.y += value;
 		return this;
 	}
 	
